@@ -1,0 +1,12 @@
+* {
+    border: red solid 1px;
+}
+
+button {
+    aspect-ratio: 1 / 1;
+}
+
+.numbers {
+    display: flex;
+    flex-direction: column;
+}
