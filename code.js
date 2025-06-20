@@ -12,7 +12,8 @@ for (let i = 0; i < numbers.length; i++) {
 
 // Equal
 document.getElementsByClassName("equal")[0].addEventListener("click", () => {
-  displayMember = operate(firstMember, currentOperator, displayMember);
+  secondMember = displayMember;
+  displayMember = operate(firstMember, currentOperator, secondMember);
   display(displayMember);
   // alert("works")
 });
@@ -21,8 +22,14 @@ document.getElementsByClassName("equal")[0].addEventListener("click", () => {
 let operators = document.getElementsByClassName("operator");
 for (let i = 0; i < operators.length; i++) {
   operators[i].addEventListener("click", () => {
-    currentOperator = String(operators[i].textContent);
-    fromFirstToSecond();
+      fromFirstToSecond();
+      currentOperator = String(operators[i].textContent);
+      if (operationCheck()) {
+          displayMember = operate(firstMember, currentOperator, secondMember);
+          firstMember = secondMember;
+          secondMember = "";
+          
+        }
   });
 }
 
@@ -31,7 +38,7 @@ document.getElementById("clear").addEventListener("click", () => {
   secondMember = 0;
   displayMember = "";
   currentOperator = "";
-  display(displayMember)
+  display(displayMember);
 });
 
 function add(a, b) {
@@ -48,13 +55,13 @@ function divide(a, b) {
 }
 function operate(numA, operator, numB) {
   if (operator === "+") {
-    return add(numA, numB);
+    return add(Number(numA), Number(numB));
   } else if (operator === "X") {
-    return multiply(numA, numB);
+    return multiply(Number(numA), Number(numB));
   } else if (operator === "-") {
-    return subtract(numA, numB);
+    return subtract(Number(numA), Number(numB));
   } else if (operator === "/") {
-    return divide(numA, numB);
+    return divide(Number(numA), Number(numB));
   } else {
     return alert("operator error");
   }
@@ -74,4 +81,11 @@ function addNumberToString(a = "", b = "") {
 function fromFirstToSecond() {
   firstMember = displayMember;
   displayMember = "";
+}
+function operationCheck() {
+  if (firstMember != "" && secondMember != "") {
+    return true;
+  } else {
+    return false;
+  }
 }
