@@ -1,12 +1,48 @@
 * {
-    border: red solid 1px;
+    /* border: red solid 1px; */
+    box-sizing: border-box;
 }
 
 button {
     aspect-ratio: 1 / 1;
+    height: 50px;
+    margin: 5px;
 }
 
 .numbers {
     display: flex;
     flex-direction: column;
+}
+.main {
+    display: flex;
+    /* gap: 5px; */
+}
+.operators {
+    display: flex;
+    flex-direction: column;
+}
+#clear {
+    height: 50px;
+    width: 115px;
+}
+
+.plus {
+    width: 50px;
+    height: 115px;
+}
+
+.screen {
+display: flex;
+border: solid black 3px;
+
+width: 240px;
+height: 60px;
+border-radius: 10px;
+
+color: black;
+font-size: 25px;
+padding: 5px;
+margin: 5px;
+justify-content: end;
+align-items: center;
 }
