@@ -2,45 +2,79 @@ let firstMember = 0;
 let secondMember = 0;
 let displayMember = "";
 let currentOperator = "";
+let lastSecondMember = "";
+let lastOperator = ""
+let OperationReady = true
+
+
 // Numbers loop
 let numbers = document.getElementsByClassName("number");
 for (let i = 0; i < numbers.length; i++) {
-  numbers[i].addEventListener("click", () =>
+  numbers[i].addEventListener("click", () => {
+    console.log(OperationReady)
+    if (OperationReady == true) {
+      clear()
+    }
     addNumberToString(displayMember, numbers[i].textContent)
+    OperationReady = false
+  }
+
   );
 }
 
 // Equal
 document.getElementsByClassName("equal")[0].addEventListener("click", () => {
-  secondMember = displayMember;
-  displayMember = operate(firstMember, currentOperator, secondMember);
-  display(displayMember);
-  // alert("works")
+
+   if (displayMember !== "") {
+    secondMember = displayMember;
+    lastSecondMember = secondMember;
+    lastOperator = currentOperator;
+  }
+
+  if (lastOperator && lastSecondMember !== "") {
+    displayMember = operate(firstMember, lastOperator, lastSecondMember);
+    display(displayMember);
+    firstMember = displayMember;
+    displayMember = ""; // Ready for next
+  }
+  OperationReady = true
+
 });
 
 // Operators loop
 let operators = document.getElementsByClassName("operator");
 for (let i = 0; i < operators.length; i++) {
   operators[i].addEventListener("click", () => {
-      fromFirstToSecond();
-      currentOperator = String(operators[i].textContent);
-      if (operationCheck()) {
-          displayMember = operate(firstMember, currentOperator, secondMember);
-          firstMember = secondMember;
-          secondMember = "";
-          
-        }
+    if (currentOperator && firstMember !== "" && displayMember !== "") {
+      secondMember = displayMember;
+      firstMember = operate(firstMember, currentOperator, secondMember);
+      display(firstMember);
+      displayMember = "";
+    } else {
+      firstMember = displayMember;
+      displayMember = "";
+    }
+
+    currentOperator = String(operators[i].textContent);
   });
 }
 
 document.getElementById("clear").addEventListener("click", () => {
-  firstMember = 0;
-  secondMember = 0;
-  displayMember = "";
-  currentOperator = "";
-  display(displayMember);
+  clear()
 });
 
+
+document.getElementById("erase").addEventListener("click", () => {
+  let arr = displayMember.split("")
+  arr.pop()
+  
+  displayMember = arr.join("")
+  display(displayMember)
+
+  
+})
+
+// Functions
 function add(a, b) {
   return a + b;
 }
@@ -81,6 +115,7 @@ function addNumberToString(a = "", b = "") {
 function fromFirstToSecond() {
   firstMember = displayMember;
   displayMember = "";
+  display(displayMember)
 }
 function operationCheck() {
   if (firstMember != "" && secondMember != "") {
@@ -88,4 +123,11 @@ function operationCheck() {
   } else {
     return false;
   }
+}
+function clear(){
+firstMember = 0;
+  secondMember = 0;
+  displayMember = "";
+  currentOperator = "";
+  display(displayMember);
 }
