@@ -3,7 +3,8 @@
     box-sizing: border-box;
     color: #00faff;
     font-size: 23px;
-    
+    font-family: 'Share Tech Mono', monospace;
+    font-weight: bolder;
 }
 body {
     display: flex;
@@ -63,7 +64,8 @@ button {
 
 .screen {
 display: flex;
- border: solid #ff00c8 1px;
+ border: solid #00faff 1px;
+ background-color: #1a1a2e;
 flex: 1;
 min-height: 100px;
 
