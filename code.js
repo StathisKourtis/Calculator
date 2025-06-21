@@ -22,8 +22,11 @@ for (let i = 0; i < numbers.length; i++) {
   );
 }
 
+
+
+
 // Equal
-document.getElementsByClassName("equal")[0].addEventListener("click", () => {
+document.getElementById("equal").addEventListener("click", () => {
 
    if (displayMember !== "") {
     secondMember = displayMember;
@@ -73,19 +76,65 @@ document.getElementById("erase").addEventListener("click", () => {
 
   
 })
+// Hotkeys
+document.addEventListener("keydown" , (event) => {
+  console.log(event.key)
+  if(event.key >= "0" && event.key <= "9" || event.key === "."){
+    for (let i = 0; i<numbers.length; i++){
+      if(numbers[i].textContent === event.key)
+      {
+        numbers[i].click()
+      }
+    }
+  }
+  if(event.key == "Backspace")
+  {
+    document.getElementById("erase").click()
+  }
+  if(event.key == "*")
+  {
+    document.getElementById("multiply").click()
+  }
+  if(event.key == "Enter")
+  {
+    document.getElementById("equal").click()
+  }
+  if (event.key == "-")
+  {
+    document.getElementById("subtruct").click()
+  }
+  if(event.key == "/"){
+    document.getElementById("modulo").click()
+  }
+  if(event.key == "Shift"){
+    document.getElementById("clear").click()
+    }
+  if(event.key == "+"){
+    document.getElementById("plus").click()
+    }
+})
 
 // Functions
 function add(a, b) {
-  return a + b;
+  let result = a + b
+  return result.toFixed(2);
 }
 function multiply(a, b) {
-  return a * b;
+  let result = a * b
+  return result.toFixed(2)
 }
 function subtract(a, b) {
-  return a - b;
+  let result = a - b
+  return result.toFixed(2)
 }
 function divide(a, b) {
-  return a / b;
+  if ( a == 0 || b == 0)
+  {return "Can't divide by zero"}
+  else{
+    let result = a / b
+    return result.toFixed(2)
+
+  }
 }
 function operate(numA, operator, numB) {
   if (operator === "+") {
@@ -131,3 +180,4 @@ firstMember = 0;
   currentOperator = "";
   display(displayMember);
 }
+console.log(operators)

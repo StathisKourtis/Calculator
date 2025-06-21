@@ -8,44 +8,47 @@
     <script src="code.js" defer></script>
 </head>
 <body>
-    <div class="screen">
+    <div id="calculator">
+<div class="screen">
 
     </div>
     <div class="main">
         <div class="numbers">
-            <div class="rowA">
+            <div class="row A">
                 <button class="number seven">7</button>
                 <button class="number eight">8</button>
                 <button class="number nine">9</button>
+                <button class="operator" id="modulo">/</button>
             </div>
-            <div class="rowB">
+            <div class="row B">
                 <button class="number four">4</button>
                 <button class="number five">5</button>
                 <button class="number six">6</button>
+                 <button class="operator" id="multiply">X</button>
             </div>
-            <div class="rowC">
-                <button class="number one" accesskey="1">1</button>
+            <div class="row C">
+                <button class="number one" accesskey="a">1</button>
                 <button class="number two">2</button>
                 <button class="number three">3</button>
+                 <button class="operator" id="subtruct">-</button>
             </div>
-            <div class="rowD">
+            <div class="row D">
                 <button class="number zero">0</button>
                 <button class="number dot">.</button>
-                <button class="equal">=</button>
-            </div>
-            <div class="rowE">
-                <button id="clear">C</button>
                 <button id="erase"><</button>
+                <button id="equal">=</button>
+                
+            </div>
+            <div class="row E">
+                <button id="clear">C</button>
+                 <button class="operator" id="plus">+</button>
+              
             </div>
             
         </div>
-        <div class="operators">
-            <button class="operator modulo">/</button>
-            <button class="operator multiply">X</button>
-            <button class="operator subtruct">-</button>
-            <button class="operator plus">+</button>
-           
-        </div>
+        
+    </div>
+    
     
 </body>
 </html>
