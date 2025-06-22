@@ -3,32 +3,34 @@ let secondMember = 0;
 let displayMember = "";
 let currentOperator = "";
 let lastSecondMember = "";
-let lastOperator = ""
-let OperationReady = true
-
+let lastOperator = "";
+let OperationReady = true;
 
 // Numbers loop
 let numbers = document.getElementsByClassName("number");
 for (let i = 0; i < numbers.length; i++) {
   numbers[i].addEventListener("click", () => {
-    console.log(OperationReady)
+    console.log(OperationReady);
     if (OperationReady == true) {
-      clear()
+      clear();
     }
-    addNumberToString(displayMember, numbers[i].textContent)
-    OperationReady = false
-  }
+    if (numbers[i].textContent == ".") {
+      if (checkForOneDot(displayMember)) {
+        return;
+      }
 
-  );
+      addNumberToString(displayMember, numbers[i].textContent);
+      OperationReady = false;
+    } else {
+      addNumberToString(displayMember, numbers[i].textContent);
+      OperationReady = false;
+    }
+  });
 }
-
-
-
 
 // Equal
 document.getElementById("equal").addEventListener("click", () => {
-
-   if (displayMember !== "") {
+  if (displayMember !== "") {
     secondMember = displayMember;
     lastSecondMember = secondMember;
     lastOperator = currentOperator;
@@ -40,8 +42,7 @@ document.getElementById("equal").addEventListener("click", () => {
     firstMember = displayMember;
     displayMember = ""; // Ready for next
   }
-  OperationReady = true
-
+  OperationReady = true;
 });
 
 // Operators loop
@@ -63,77 +64,68 @@ for (let i = 0; i < operators.length; i++) {
 }
 
 document.getElementById("clear").addEventListener("click", () => {
-  clear()
+  clear();
 });
 
-
 document.getElementById("erase").addEventListener("click", () => {
-  let arr = displayMember.split("")
-  arr.pop()
-  
-  displayMember = arr.join("")
-  display(displayMember)
+  let arr = displayMember.split("");
+  arr.pop();
 
-  
-})
+  displayMember = arr.join("");
+  display(displayMember);
+});
 // Hotkeys
-document.addEventListener("keydown" , (event) => {
-  console.log(event.key)
-  if(event.key >= "0" && event.key <= "9" || event.key === "."){
-    for (let i = 0; i<numbers.length; i++){
-      if(numbers[i].textContent === event.key)
-      {
-        numbers[i].click()
+document.addEventListener("keydown", (event) => {
+  console.log(event.key);
+  if ((event.key >= "0" && event.key <= "9") || event.key === ".") {
+    for (let i = 0; i < numbers.length; i++) {
+      if (numbers[i].textContent === event.key) {
+        numbers[i].click();
       }
     }
   }
-  if(event.key == "Backspace")
-  {
-    document.getElementById("erase").click()
+  if (event.key == "Backspace") {
+    document.getElementById("erase").click();
   }
-  if(event.key == "*")
-  {
-    document.getElementById("multiply").click()
+  if (event.key == "*") {
+    document.getElementById("multiply").click();
   }
-  if(event.key == "Enter")
-  {
-    document.getElementById("equal").click()
+  if (event.key == "Enter") {
+    document.getElementById("equal").click();
   }
-  if (event.key == "-")
-  {
-    document.getElementById("subtruct").click()
+  if (event.key == "-") {
+    document.getElementById("subtruct").click();
   }
-  if(event.key == "/"){
-    document.getElementById("modulo").click()
+  if (event.key == "/") {
+    document.getElementById("modulo").click();
   }
-  if(event.key == "Shift"){
-    document.getElementById("clear").click()
-    }
-  if(event.key == "+"){
-    document.getElementById("plus").click()
-    }
-})
+  if (event.key == "Shift") {
+    document.getElementById("clear").click();
+  }
+  if (event.key == "+") {
+    document.getElementById("plus").click();
+  }
+});
 
 // Functions
 function add(a, b) {
-  let result = a + b
+  let result = a + b;
   return result.toFixed(2);
 }
 function multiply(a, b) {
-  let result = a * b
-  return result.toFixed(2)
+  let result = a * b;
+  return result.toFixed(2);
 }
 function subtract(a, b) {
-  let result = a - b
-  return result.toFixed(2)
+  let result = a - b;
+  return result.toFixed(2);
 }
 function divide(a, b) {
-  if ( a == 0 || b == 0)
-  {return "Can't divide by zero"}
-  else{
-    let result = a / b
-    return result.toFixed(2)
-
+  if (a == 0 || b == 0) {
+    return "Can't divide by zero";
+  } else {
+    let result = a / b;
+    return result.toFixed(2);
   }
 }
 function operate(numA, operator, numB) {
@@ -164,7 +156,7 @@ function addNumberToString(a = "", b = "") {
 function fromFirstToSecond() {
   firstMember = displayMember;
   displayMember = "";
-  display(displayMember)
+  display(displayMember);
 }
 function operationCheck() {
   if (firstMember != "" && secondMember != "") {
@@ -173,11 +165,18 @@ function operationCheck() {
     return false;
   }
 }
-function clear(){
-firstMember = 0;
+function clear() {
+  firstMember = 0;
   secondMember = 0;
   displayMember = "";
   currentOperator = "";
   display(displayMember);
 }
-console.log(operators)
+function checkForOneDot(displayMember) {
+  let arr = displayMember.split("");
+  if (arr.includes(".")) {
+    return true;
+  } else {
+    return false;
+  }
+}

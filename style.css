@@ -12,8 +12,12 @@ body {
     background-color: black;
 }
 #calculator{
-    background-color: #0f0f1b;
+    background: #FF33CC;
+background: -moz-linear-gradient(45deg, #FF33CC 0%, #00E0FF 50%, #0F0F1B 100%);
+background: -webkit-linear-gradient(45deg, #FF33CC 0%, #00E0FF 50%, #0F0F1B 100%);
+background: linear-gradient(45deg, #FF33CC 0%, #00E0FF 50%, #0F0F1B 100%);
     padding: 15px;
+    border: 4px outset #FF33CC;
     border-radius: 8px;
 
     flex: 1;
